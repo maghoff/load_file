@@ -8,3 +8,7 @@ repository = "https://github.com/maghoff/load_file"
 readme = "README.md"
 keywords = []
 categories = []
+
+[badges]
+travis-ci = { repository = "maghoff/load_file", branch = "master" }
+maintenance = { status = "experimental" }

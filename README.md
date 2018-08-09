@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/maghoff/load_file.svg?branch=master)](https://travis-ci.org/maghoff/load_file)
+[![Documentation](https://docs.rs/load_file/badge.svg)](https://docs.rs/load_file/)
+
 This crate provides macros to help conveniently load the contents of
 files during development.
 
