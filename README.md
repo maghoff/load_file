@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/maghoff/load_file.svg?branch=master)](https://travis-ci.org/maghoff/load_file)
+[![Latest version](https://img.shields.io/crates/v/load_file.svg)](https://crates.io/crates/load_file)
 [![Documentation](https://docs.rs/load_file/badge.svg)](https://docs.rs/load_file/)
 
 This crate provides macros to help conveniently load the contents of
