@@ -30,14 +30,17 @@
 //! }
 //! ```
 
-use std::{path::Path, fs::File, io::Read, str};
+use std::{path::{Path, PathBuf}, fs::File, io::Read, str};
 
 #[doc(hidden)]
-pub fn load_file_bytes(base: &str, rel: &str) -> Result<&'static [u8], &'static str> {
-    let path = Path::new(base)
+pub fn resolve_path(base: &str, rel: &str) -> Result<PathBuf, &'static str> {
+    Ok(Path::new(base)
         .parent().ok_or("invalid source file path")?
-        .join(rel);
+        .join(rel))
+}
 
+#[doc(hidden)]
+pub fn load_file_bytes(path: &Path) -> Result<&'static [u8], &'static str> {
     let mut f = File::open(path).map_err(|_| "file not found")?;
 
     let mut contents = Vec::new();
@@ -49,8 +52,8 @@ pub fn load_file_bytes(base: &str, rel: &str) -> Result<&'static [u8], &'static 
 }
 
 #[doc(hidden)]
-pub fn load_file_str(base: &str, rel: &str) -> Result<&'static str, &'static str> {
-    let bytes = load_file_bytes(base, rel)?;
+pub fn load_file_str(path: &Path) -> Result<&'static str, &'static str> {
+    let bytes = load_file_bytes(path)?;
     let s = str::from_utf8(bytes).map_err(|_| "invalid utf8")?;
     Ok(s)
 }
@@ -99,14 +102,21 @@ pub fn load_file_str(base: &str, rel: &str) -> Result<&'static str, &'static str
 ///  * Read errors
 #[macro_export]
 macro_rules! load_bytes {
-    ($name:expr) => {
-        match $crate::load_file_bytes(file!(), $name) {
+    ($name:expr) => {{
+        let path = match $crate::resolve_path(file!(), $name) {
             Ok(x) => x,
             Err(msg) => {
                 panic!(format!("{} in load_bytes!({:?})", msg, $name));
             }
+        };
+        match $crate::load_file_bytes(&path) {
+            Ok(x) => x,
+            Err(msg) => {
+                panic!(format!("{} in load_bytes!({:?}) (resolved to: {:?})",
+                    msg, $name, path));
+            }
         }
-    };
+    }};
 }
 
 /// Load a utf8-encoded file as a string at run-time.
@@ -151,12 +161,19 @@ macro_rules! load_bytes {
 ///  * UTF-8 validation errors
 #[macro_export]
 macro_rules! load_str {
-    ($name:expr) => {
-        match $crate::load_file_str(file!(), $name) {
+    ($name:expr) => {{
+        let path = match $crate::resolve_path(file!(), $name) {
             Ok(x) => x,
             Err(msg) => {
-                panic!(format!("{} in load_str!({:?})", msg, $name));
+                panic!(format!("{} in load_bytes!({:?})", msg, $name));
+            }
+        };
+        match $crate::load_file_str(&path) {
+            Ok(x) => x,
+            Err(msg) => {
+                panic!(format!("{} in load_str!({:?}) (resolved to: {:?})",
+                    msg, $name, path));
             }
         }
-    };
+    }};
 }
