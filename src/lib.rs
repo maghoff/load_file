@@ -4,11 +4,11 @@
 //! `load_str!` and `load_bytes!` are modeled after `include_str!` and
 //! `include_bytes!` from the standard library. The standard library macros
 //! are useful in many situations, one of which is quick-and-dirty loading of
-//! assets during a prototyping phase. (Examples of such assets could be
-//! static web assets such as CSS or GLSL shaders for a game.) The `load_*`
-//! macros aim to offer a convenient stepping stone to move from this to
-//! loading the assets dynamically at run-time. This gets rid of the need to
-//! compile or even restart for every change while iterating on the assets.
+//! assets during a prototyping phase. (Examples of such assets are static web
+//! assets such as CSS or GLSL shaders for a game.) The `load_*` macros aim to
+//! offer a convenient way of loading the assets dynamically at run-time
+//! instead. This gets rid of the need to compile or even restart for every
+//! change while iterating on the assets.
 //!
 //! # Example
 //! Before:

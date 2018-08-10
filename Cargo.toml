@@ -7,7 +7,7 @@ license = "MIT"
 repository = "https://github.com/maghoff/load_file"
 readme = "README.md"
 keywords = []
-categories = []
+categories = [ "development-tools" ]
 
 [badges]
 travis-ci = { repository = "maghoff/load_file", branch = "master" }
