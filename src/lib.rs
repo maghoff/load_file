@@ -165,7 +165,7 @@ macro_rules! load_str {
         let path = match $crate::resolve_path(file!(), $name) {
             Ok(x) => x,
             Err(msg) => {
-                panic!(format!("{} in load_bytes!({:?})", msg, $name));
+                panic!(format!("{} in load_str!({:?})", msg, $name));
             }
         };
         match $crate::load_file_str(&path) {
