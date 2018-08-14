@@ -6,9 +6,9 @@ authors = ["Magnus Hovland Hoff <maghoff@gmail.com>"]
 license = "MIT"
 repository = "https://github.com/maghoff/load_file"
 readme = "README.md"
-keywords = []
+keywords = [ "include_str!", "include_bytes!" ]
 categories = [ "development-tools" ]
 
 [badges]
 travis-ci = { repository = "maghoff/load_file", branch = "master" }
-maintenance = { status = "experimental" }
+maintenance = { status = "passively-maintained" }
