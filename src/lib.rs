@@ -106,14 +106,14 @@ macro_rules! load_bytes {
         let path = match $crate::resolve_path(file!(), $name) {
             Ok(x) => x,
             Err(msg) => {
-                panic!(format!("{} in load_bytes!({:?})", msg, $name));
+                panic!("{} in load_bytes!({:?})", msg, $name);
             }
         };
         match $crate::load_file_bytes(&path) {
             Ok(x) => x,
             Err(msg) => {
-                panic!(format!("{} in load_bytes!({:?}) (resolved to: {:?})",
-                    msg, $name, path));
+                panic!("{} in load_bytes!({:?}) (resolved to: {:?})",
+                    msg, $name, path);
             }
         }
     }};
@@ -165,14 +165,14 @@ macro_rules! load_str {
         let path = match $crate::resolve_path(file!(), $name) {
             Ok(x) => x,
             Err(msg) => {
-                panic!(format!("{} in load_str!({:?})", msg, $name));
+                panic!("{} in load_str!({:?})", msg, $name);
             }
         };
         match $crate::load_file_str(&path) {
             Ok(x) => x,
             Err(msg) => {
-                panic!(format!("{} in load_str!({:?}) (resolved to: {:?})",
-                    msg, $name, path));
+                panic!("{} in load_str!({:?}) (resolved to: {:?})",
+                    msg, $name, path);
             }
         }
     }};
