@@ -187,3 +187,20 @@ macro_rules! load_str {
         }
     }};
 }
+
+#[cfg(test)]
+mod test {
+    use super::load_str;
+
+    #[test]
+    fn basic_load_str() {
+        let greeting = load_str!("greeting.txt");
+        assert_eq!(greeting, "Hello world!\n");
+    }
+
+    #[test]
+    #[should_panic]
+    fn load_str_file_not_found() {
+        load_str!("404.txt");
+    }
+}
