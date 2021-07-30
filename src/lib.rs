@@ -30,12 +30,18 @@
 //! }
 //! ```
 
-use std::{path::{Path, PathBuf}, fs::File, io::Read, str};
+use std::{
+    fs::File,
+    io::Read,
+    path::{Path, PathBuf},
+    str,
+};
 
 #[doc(hidden)]
 pub fn resolve_path(base: &str, rel: &str) -> Result<PathBuf, &'static str> {
     Ok(Path::new(base)
-        .parent().ok_or("invalid source file path")?
+        .parent()
+        .ok_or("invalid source file path")?
         .join(rel))
 }
 
@@ -112,8 +118,10 @@ macro_rules! load_bytes {
         match $crate::load_file_bytes(&path) {
             Ok(x) => x,
             Err(msg) => {
-                panic!("{} in load_bytes!({:?}) (resolved to: {:?})",
-                    msg, $name, path);
+                panic!(
+                    "{} in load_bytes!({:?}) (resolved to: {:?})",
+                    msg, $name, path
+                );
             }
         }
     }};
@@ -171,8 +179,10 @@ macro_rules! load_str {
         match $crate::load_file_str(&path) {
             Ok(x) => x,
             Err(msg) => {
-                panic!("{} in load_str!({:?}) (resolved to: {:?})",
-                    msg, $name, path);
+                panic!(
+                    "{} in load_str!({:?}) (resolved to: {:?})",
+                    msg, $name, path
+                );
             }
         }
     }};
