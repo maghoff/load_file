@@ -1,7 +1,7 @@
 [package]
 name = "load_file"
 description = "Macros to help conveniently load the contents of files during development."
-version = "1.0.0"
+version = "1.0.1"
 authors = ["Magnus Hovland Hoff <maghoff@gmail.com>"]
 license = "MIT"
 repository = "https://github.com/maghoff/load_file"
